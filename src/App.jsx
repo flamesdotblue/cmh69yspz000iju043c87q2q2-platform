@@ -1,28 +1,34 @@
-import { useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import HeaderNav from './components/HeaderNav';
+import Hero from './components/Hero';
+import Portfolio from './components/Portfolio';
+import FooterAboutContact from './components/FooterAboutContact';
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem('reducedMotion');
+    if (stored) setReducedMotion(stored === 'true');
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('reducedMotion', String(reducedMotion));
+    if (reducedMotion) {
+      document.documentElement.classList.add('motion-reduce');
+    } else {
+      document.documentElement.classList.remove('motion-reduce');
+    }
+  }, [reducedMotion]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
-      </div>
+    <div className="min-h-screen bg-white text-neutral-900 antialiased">
+      <HeaderNav reducedMotion={reducedMotion} onToggleReduced={() => setReducedMotion(v => !v)} />
+      <main>
+        <Hero reducedMotion={reducedMotion} />
+        <Portfolio reducedMotion={reducedMotion} />
+      </main>
+      <FooterAboutContact reducedMotion={reducedMotion} />
     </div>
-  )
+  );
 }
-
-export default App
