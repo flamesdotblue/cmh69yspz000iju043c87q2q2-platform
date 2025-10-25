@@ -1,40 +1,20 @@
 import React, { useMemo, useRef, useState, useEffect } from 'react';
 
-const accent = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A66B]';
+const focusAccent = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A66B]';
 
 const mediaItems = [
-  // Selected Works (mix of images and videos)
-  {
-    id: 'w1', type: 'image', src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop',
-    alt: 'Sleek product close-up with dramatic lighting', title: 'Product Noir', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Product'
-  },
-  {
-    id: 'w2', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4',
-    poster: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop',
-    alt: 'Macro nature loop preview', title: 'Petals in Motion', year: 2024, format: 'Video', category: 'video', subcategory: 'Social'
-  },
-  {
-    id: 'w3', type: 'image', src: 'https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1600&auto=format&fit=crop',
-    alt: 'Model portrait with soft natural light', title: 'Muse', year: 2023, format: 'Photo', category: 'photo', subcategory: 'Model'
-  },
-  {
-    id: 'w4', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm',
-    poster: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop',
-    alt: 'Gourmet food b-roll', title: 'Plated', year: 2023, format: 'Video', category: 'video', subcategory: 'Restaurant'
-  },
-  {
-    id: 'w5', type: 'image', src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop',
-    alt: 'Event crowd with warm mood lighting', title: 'Pulse', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Event'
-  },
+  { id: 'w1', type: 'image', src: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop', alt: 'Sleek product close-up with dramatic lighting', title: 'Product Noir', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Product' },
+  { id: 'w2', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster: 'https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop', alt: 'Macro nature loop preview', title: 'Petals in Motion', year: 2024, format: 'Video', category: 'video', subcategory: 'Social' },
+  { id: 'w3', type: 'image', src: 'https://images.unsplash.com/photo-1532634896-26909d0d4b6a?q=80&w=1600&auto=format&fit=crop', alt: 'Model portrait with soft natural light', title: 'Muse', year: 2023, format: 'Photo', category: 'photo', subcategory: 'Model' },
+  { id: 'w4', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm', poster: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=1200&auto=format&fit=crop', alt: 'Gourmet food b-roll', title: 'Plated', year: 2023, format: 'Video', category: 'video', subcategory: 'Restaurant' },
+  { id: 'w5', type: 'image', src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=1600&auto=format&fit=crop', alt: 'Event crowd with warm mood lighting', title: 'Pulse', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Event' },
 ];
 
 const catalog = [
-  // Photography categories
   { id: 'p1', type: 'image', src: 'https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1600&auto=format&fit=crop', alt: 'Product studio still', title: 'Glass & Steel', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Product' },
   { id: 'p2', type: 'image', src: 'https://images.unsplash.com/photo-1516571137133-1be29e37143b?q=80&w=1600&auto=format&fit=crop', alt: 'Model portrait studio', title: 'Studio Muse', year: 2023, format: 'Photo', category: 'photo', subcategory: 'Model' },
   { id: 'p3', type: 'image', src: 'https://images.unsplash.com/photo-1543353071-10c8ba85a904?q=80&w=1600&auto=format&fit=crop', alt: 'Food still life', title: 'Citrus Pop', year: 2023, format: 'Photo', category: 'photo', subcategory: 'Food' },
   { id: 'p4', type: 'image', src: 'https://images.unsplash.com/photo-1501577316686-a5cbf6c1df7e?q=80&w=1600&auto=format&fit=crop', alt: 'Event hands in air', title: 'Night Energy', year: 2024, format: 'Photo', category: 'photo', subcategory: 'Event' },
-  // Videography categories
   { id: 'v1', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster: 'https://images.unsplash.com/photo-1520975916090-3105956dac38?q=80&w=1600&auto=format&fit=crop', alt: 'Wedding couple walk', title: 'Eternal', year: 2024, format: 'Video', category: 'video', subcategory: 'Wedding' },
   { id: 'v2', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm', poster: 'https://images.unsplash.com/photo-1521335629791-ce4aec67dd47?q=80&w=1600&auto=format&fit=crop', alt: 'Event highlight', title: 'Launch Night', year: 2023, format: 'Video', category: 'video', subcategory: 'Event' },
   { id: 'v3', type: 'video', src: 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4', poster: 'https://images.unsplash.com/photo-1515165562835-c3b8c2e92690?q=80&w=1600&auto=format&fit=crop', alt: 'Social short edit', title: 'Seconds', year: 2024, format: 'Video', category: 'video', subcategory: 'Social' },
@@ -46,7 +26,7 @@ function MediaCard({ item, onOpen, reducedMotion }) {
   return (
     <button
       onClick={() => onOpen(item)}
-      className={`group relative overflow-hidden rounded-lg bg-neutral-100 ${accent}`}
+      className={`group relative overflow-hidden rounded-lg bg-neutral-100 ${focusAccent}`}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
       aria-label={`${item.title} ${item.format}`}
@@ -56,7 +36,7 @@ function MediaCard({ item, onOpen, reducedMotion }) {
           src={item.src}
           alt={item.alt}
           loading="lazy"
-          className="h-64 w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03] grayscale group-hover:grayscale-0"
+          className="h-64 w-full object-cover transition duration-200 ease-out group-hover:scale-[1.03] grayscale-[30%] group-hover:grayscale-0"
         />
       ) : (
         <div className="relative h-64 w-full">
@@ -81,7 +61,9 @@ function MediaCard({ item, onOpen, reducedMotion }) {
 }
 
 function Lightbox({ items, index, onClose, setIndex }) {
-  const ref = useRef(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   useEffect(() => {
     function onKey(e) {
       if (e.key === 'Escape') onClose();
@@ -93,16 +75,16 @@ function Lightbox({ items, index, onClose, setIndex }) {
   }, [items.length, onClose, setIndex]);
 
   const item = items[index];
-  if (!item) return null;
+  if (!item || !mounted) return null;
 
   return (
     <div role="dialog" aria-modal="true" className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={onClose}>
-      <div ref={ref} className="relative max-h-[92vh] w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-        <button aria-label="Close" onClick={onClose} className={`absolute right-3 top-3 z-10 rounded bg-white/90 px-3 py-1 text-sm ${accent}`}>Close</button>
+      <div className="relative max-h-[92vh] w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
+        <button aria-label="Close" onClick={onClose} className={`absolute right-3 top-3 z-10 rounded bg-white/90 px-3 py-1 text-sm ${focusAccent}`}>Close</button>
         {item.type === 'image' ? (
-          <img src={item.src} alt={item.alt} className="max-h-[92vh] w-full object-contain" />
+          <img src={item.src} alt={item.alt} className="max-h-[72vh] w-full object-contain" />
         ) : (
-          <video src={item.src} poster={item.poster} controls className="max-h-[92vh] w-full object-contain" />
+          <video src={item.src} poster={item.poster} controls className="max-h-[72vh] w-full object-contain" />
         )}
         <div className="mt-3 text-white/90">
           <div className="text-base font-medium">{item.title}</div>
@@ -111,9 +93,9 @@ function Lightbox({ items, index, onClose, setIndex }) {
           </p>
         </div>
         <div className="mt-2 flex items-center justify-between text-white/70 text-xs">
-          <button onClick={() => setIndex((i) => Math.max(0, i - 1))} className={`rounded border border-white/30 px-3 py-1 ${accent}`}>Prev</button>
+          <button onClick={() => setIndex((i) => Math.max(0, i - 1))} className={`rounded border border-white/30 px-3 py-1 ${focusAccent}`}>Prev</button>
           <span>{index + 1} / {items.length}</span>
-          <button onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))} className={`rounded border border-white/30 px-3 py-1 ${accent}`}>Next</button>
+          <button onClick={() => setIndex((i) => Math.min(items.length - 1, i + 1))} className={`rounded border border-white/30 px-3 py-1 ${focusAccent}`}>Next</button>
         </div>
       </div>
     </div>
@@ -160,8 +142,8 @@ export default function Portfolio({ reducedMotion }) {
             ))}
           </div>
           <div className="mt-3 flex items-center gap-2">
-            <button onClick={() => stripRef.current?.scrollBy({ left: -400, behavior: 'smooth' })} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${accent}`}>Prev</button>
-            <button onClick={() => stripRef.current?.scrollBy({ left: 400, behavior: 'smooth' })} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${accent}`}>Next</button>
+            <button onClick={() => stripRef.current?.scrollBy({ left: -400, behavior: 'smooth' })} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${focusAccent}`}>Prev</button>
+            <button onClick={() => stripRef.current?.scrollBy({ left: 400, behavior: 'smooth' })} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${focusAccent}`}>Next</button>
           </div>
         </div>
       </div>
@@ -177,7 +159,7 @@ export default function Portfolio({ reducedMotion }) {
 
         <div className="mt-4 flex flex-wrap items-center gap-2">
           {(mode==='photo'?photoFilters:videoFilters).map((f) => (
-            <button key={f} onClick={() => setFilter(f)} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${accent} ${filter===f?'bg-neutral-900 text-white border-neutral-900':''}`}>{f}</button>
+            <button key={f} onClick={() => setFilter(f)} className={`rounded-full border border-neutral-300 px-3 py-1 text-sm hover:bg-neutral-100 ${focusAccent} ${filter===f?'bg-neutral-900 text-white border-neutral-900':''}`}>{f}</button>
           ))}
         </div>
 

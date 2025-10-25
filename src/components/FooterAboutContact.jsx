@@ -1,6 +1,6 @@
 import React from 'react';
 
-const accent = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A66B]';
+const focusAccent = 'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#C9A66B]';
 
 export default function FooterAboutContact() {
   return (
@@ -18,7 +18,7 @@ export default function FooterAboutContact() {
                 <li>Clients: Nova, Atelier, Greens&Co, Pulse Events</li>
               </ul>
               <div className="mt-4 flex items-center gap-3">
-                <a href="#" className="rounded-full border border-neutral-300 px-3 py-2 text-sm hover:bg-neutral-100 inline-flex items-center gap-2 ${accent}">Download CV</a>
+                <a href="#" className={`rounded-full border border-neutral-300 px-3 py-2 text-sm hover:bg-neutral-100 inline-flex items-center gap-2 ${focusAccent}`}>Download CV</a>
                 <a href="#contact" className="rounded-full bg-neutral-900 text-white px-4 py-2 text-sm hover:bg-neutral-800">Request Pricing</a>
               </div>
             </div>
@@ -42,21 +42,21 @@ export default function FooterAboutContact() {
         <section id="contact">
           <h3 className="font-serif text-2xl tracking-tight">Contact & Booking</h3>
           <p className="mt-2 text-neutral-700">Share a few details and I’ll respond within 48 hours. Your information stays private and is only used to reply to your inquiry.</p>
-          <form onSubmit={(e) => { e.preventDefault(); const form = e.currentTarget; form.reset(); alert('Thanks—we’ll respond within 48 hours.'); }} className="mt-6 grid gap-3">
+          <form onSubmit={(e) => { e.preventDefault(); const form = e.currentTarget; if (form.company && form.company.value) return; form.reset(); alert('Thanks—we’ll respond within 48 hours.'); }} className="mt-6 grid gap-3" aria-describedby="privacy-note">
             <div className="grid md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm text-neutral-700">Name</label>
-                <input required name="name" type="text" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${accent}`} />
+                <label className="block text-sm text-neutral-700" htmlFor="name">Name</label>
+                <input id="name" required name="name" type="text" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${focusAccent}`} />
               </div>
               <div>
-                <label className="block text-sm text-neutral-700">Email</label>
-                <input required name="email" type="email" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${accent}`} />
+                <label className="block text-sm text-neutral-700" htmlFor="email">Email</label>
+                <input id="email" required name="email" type="email" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${focusAccent}`} />
               </div>
             </div>
             <div className="grid md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-sm text-neutral-700">Project Type</label>
-                <select name="type" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${accent}`}>
+                <label className="block text-sm text-neutral-700" htmlFor="type">Project Type</label>
+                <select id="type" name="type" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${focusAccent}`}>
                   <option>Photography — Product</option>
                   <option>Photography — Model</option>
                   <option>Photography — Food</option>
@@ -68,23 +68,24 @@ export default function FooterAboutContact() {
                 </select>
               </div>
               <div>
-                <label className="block text-sm text-neutral-700">Preferred Dates</label>
-                <input name="dates" type="text" placeholder="e.g., June 5–8 or flexible" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${accent}`} />
+                <label className="block text-sm text-neutral-700" htmlFor="dates">Preferred Dates</label>
+                <input id="dates" name="dates" type="text" placeholder="e.g., June 5–8 or flexible" className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${focusAccent}`} />
               </div>
             </div>
             <div className="hidden">
-              <label>Leave this empty</label>
-              <input type="text" name="company" tabIndex={-1} autoComplete="off" />
+              <label htmlFor="company">Leave this empty</label>
+              <input id="company" type="text" name="company" tabIndex={-1} autoComplete="off" />
             </div>
             <div>
-              <label className="block text-sm text-neutral-700">Short Message</label>
-              <textarea name="message" rows={4} className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${accent}`}></textarea>
+              <label className="block text-sm text-neutral-700" htmlFor="message">Short Message</label>
+              <textarea id="message" name="message" rows={4} className={`mt-1 w-full rounded-md border border-neutral-300 px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#C9A66B]/60 ${focusAccent}`}></textarea>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex flex-wrap items-center gap-3">
               <button type="submit" className="rounded-full bg-neutral-900 text-white px-5 py-2 text-sm hover:bg-neutral-800">Send</button>
               <a href="mailto:hello@devpatel.studio" className="text-sm underline underline-offset-4">hello@devpatel.studio</a>
               <a href="#" className="text-sm underline underline-offset-4">Book via Calendly</a>
             </div>
+            <p id="privacy-note" className="sr-only">We respect your privacy and only use this information to reply.</p>
           </form>
         </section>
       </div>

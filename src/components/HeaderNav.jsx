@@ -4,9 +4,9 @@ import { Camera, Menu, X } from 'lucide-react';
 export default function HeaderNav({ reducedMotion, onToggleReduced }) {
   const [open, setOpen] = React.useState(false);
   return (
-    <header className="sticky top-0 z-40 w-full backdrop-blur supports-[backdrop-filter]:bg-white/60 bg-white/80 border-b border-neutral-200">
+    <header className="sticky top-0 z-40 w-full backdrop-blur supports-[backdrop-filter]:bg-white/70 bg-white/85 border-b border-neutral-200">
       <div className="mx-auto max-w-6xl px-4 py-3 flex items-center justify-between">
-        <a href="#top" className="flex items-center gap-2">
+        <a href="#top" className="flex items-center gap-2" aria-label="Dev Patel Home">
           <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-neutral-900 text-white"><Camera size={18} /></span>
           <span className="font-serif text-lg tracking-tight">Dev Patel</span>
         </a>

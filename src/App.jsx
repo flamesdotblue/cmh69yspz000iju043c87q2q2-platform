@@ -23,12 +23,13 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-white text-neutral-900 antialiased">
+      <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 rounded bg-neutral-900 px-3 py-2 text-white">Skip to content</a>
       <HeaderNav reducedMotion={reducedMotion} onToggleReduced={() => setReducedMotion(v => !v)} />
-      <main>
+      <main id="main">
         <Hero reducedMotion={reducedMotion} />
         <Portfolio reducedMotion={reducedMotion} />
       </main>
-      <FooterAboutContact reducedMotion={reducedMotion} />
+      <FooterAboutContact />
     </div>
   );
 }
